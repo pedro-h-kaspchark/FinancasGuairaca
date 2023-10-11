@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     initializeForm(){
         this.form = this.formbuilder.group({
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]]
+            password: ['', [Validators.required, Validators.minLength(3)]]
         })
     }
 
@@ -34,6 +34,6 @@ export class LoginComponent implements OnInit {
         if(!user){
             return;
         }
-        this.authService.login(user).then(() => this.router.navigate(['home'])).catch((error) => {console.log(error); this.messageService.add({severity: 'error', summary: 'Erro de Login', detail: 'Falha na autenticação.'})});
+        this.authService.login(user).then(() => this.router.navigate(['home'])).catch((error) => {this.form.reset()});
     }
 }
