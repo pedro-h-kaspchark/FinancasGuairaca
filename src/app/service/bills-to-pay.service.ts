@@ -10,19 +10,22 @@ export class BillsToPayService {
   private billsPayRef: AngularFirestoreCollection<any>;
 
   constructor(private db: AngularFirestore) {
-    this.billsPayRef = db.collection(this.dbPathBillsPay);
-  }
+      this.billsPayRef = db.collection(this.dbPathBillsPay);
+    }
 
-  getAll(): AngularFirestoreCollection<any>{
-    return this.billsPayRef;
-  }
-  create(billToPay: BillToPay){
-    return this.billsPayRef.add({ ...billToPay});
-  }
-  uptade(id: string, data: BillToPay): Promise<void>{
-    return this.billsPayRef.doc(id).update(data);
-  }
-  delete(id: string): Promise<void>{
-    return this.billsPayRef.doc(id).delete();
-  }
+    getAll(): AngularFirestoreCollection<any> {
+        return this.billsPayRef;
+    }
+
+    create(billToPay: BillToPay) {
+        return this.billsPayRef.add({ ...billToPay });
+    }
+
+    update(id: string, data: BillToPay): Promise<void> {
+        return this.billsPayRef.doc(id).update(data);
+    }
+
+    delete(id: string): Promise<void> {
+        return this.billsPayRef.doc(id).delete();
+    }
 }
