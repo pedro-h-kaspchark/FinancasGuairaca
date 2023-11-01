@@ -16,10 +16,15 @@ import { RouterModule } from '@angular/router';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { getFirestore,
+provideFirestore } from '@angular/fire/firestore';
+import { getStorage,
+provideStorage } from '@angular/fire/storage';
+import { getDatabase,
+    provideDatabase } from '@angular/fire/database';
+import { FIREBASE_OPTIONS }
+from '@angular/fire/compat';
+
 
 @NgModule({
     declarations: [
@@ -38,7 +43,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ],
     providers: [
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase}
+        PhotoService, ProductService,
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
     ],
     bootstrap: [AppComponent]
 })

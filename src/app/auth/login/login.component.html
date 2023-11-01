@@ -9,15 +9,25 @@
 
                 <form class="form" [formGroup]="form" (ngSubmit)="login()">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="email1" formControlName="email" type="text" placeholder="Seu email" pInputText class="w-full md:w-30rem" style="padding:1rem">
-                <small class="ng-dirty ng-invalid ng-validator" *ngIf="!this.form.get('email')?.valid && (this.form.get('email')?.dirty || this.form.get('email')?.touched)">
-                    O campo e-mail é obrigatório!
-                </small>
+                    <input id="email1" formControlName="email" type="text" placeholder="Seu email" pInputText
+                        class="w-full md:w-30rem" style="padding:1rem">
+                    <small class="ng-dirty ng-invalid ng-validator"
+                        *ngIf="!this.form.get('email')?.valid &&
+                            (this.form.get('email')?.dirty ||
+                             this.form.get('email')?.touched)
+                        "> O campo e-mail é obrigatório.
+                    </small>
+
                     <label for="password1" class="block text-900 font-medium text-xl mt-5 mb-2">Senha</label>
-                    <input id="password1" formControlName="password" type="password" placeholder="Sua senha" pInputText class="w-full md:w-30rem" style="padding:1rem">
-                <small class="ng-dirty ng-invalid ng-validator" *ngIf="!this.form.get('password')?.valid && (this.form.get('password')?.dirty || this.form.get('password')?.touched)">
-                    O campo senha é obrigatório!
-                </small>
+                    <input id="password1" formControlName="password" type="password" placeholder="Seu senha" pInputText
+                        class="w-full md:w-30rem" style="padding:1rem">
+                    <small class="ng-dirty ng-invalid ng-validator" *ngIf="!this.form.get('password')?.valid &&
+                            (this.form.get('password')?.dirty ||
+                             this.form.get('password')?.touched)
+                        ">
+                        O campo senha é obrigatório.
+                    </small>
+
                     <div class="flex align-items-center justify-content-between mt-5 mb-5 gap-5">
                         <div class="flex align-items-center">
                             <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>

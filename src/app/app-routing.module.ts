@@ -16,7 +16,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
                     { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },
                     { path: 'contas-a-pagar', loadChildren: () => import('./cruds/bills-to-pay/bills-to-pay.module').then(m => m.BillsToPayModule) },
-                    { path: 'contas-a-receber', loadChildren: () => import('./cruds/bills-to-pay/bills-to-pay.module').then(m => m.BillsToPayModule) }
+                    { path: 'contas-a-receber', loadChildren: () => import('./cruds/bills-to-receive/bills-to-receive.module').then(m => m.BillsToReceiveModule) }
                 ]
             },
             { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },

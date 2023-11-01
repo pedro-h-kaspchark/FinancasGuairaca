@@ -1,4 +1,4 @@
-export interface BillToPay{
+export interface BillToPay {
     id?: string;
     name: string;
     documentDate: Date;
