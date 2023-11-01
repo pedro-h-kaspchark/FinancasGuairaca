@@ -24,9 +24,20 @@ export class BillsToPayComponent implements OnInit {
     constructor(private messageService: MessageService, private billsToPayService: BillsToPayService, private formBuilder: FormBuilder
     ) { }
 
-    ngOnInit() {
+    ngOnInit(){
         this.onCreateForm();
         this.onLoadItems();
+        this.onLoadCols();
+    }
+
+    onLoadCols(){
+        this.cols = [
+            {field: 'name', header: 'Nome'},
+            {field: 'documentDate', header: 'Data do documento'},
+            {field: 'documentNumer', header: 'Numero do documento'},
+            {field: 'supplierName', header: 'Fornecedor'},
+            {field: 'amount', header: 'Valor'}
+        ];
     }
 
     openNew() {
@@ -35,15 +46,15 @@ export class BillsToPayComponent implements OnInit {
 
     }
 
-    hideDialog() {
+    hideDialog(){
         this.itemDialog = false;
     }
 
-    onGlobalFilter(table: Table, event: Event) {
+    onGlobalFilter(table: Table, event: Event){
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
 
-    onCreateForm() {
+    onCreateForm(){
        this.form = this.formBuilder.group({
           name: ['', Validators.required],
           documentDate: ['', Validators.required],
@@ -55,7 +66,7 @@ export class BillsToPayComponent implements OnInit {
        });
     }
 
-    onLoadItems() {
+    onLoadItems(){
         this.billsToPayService.getAll().snapshotChanges().pipe(
             map(changes =>
                changes.map(c =>
@@ -67,15 +78,15 @@ export class BillsToPayComponent implements OnInit {
         });
     }
 
-    onSaveForm() {
-        if (!this.item?.id) {
+    onSaveForm(){
+        if (!this.item?.id){
             return this.createBillPay();
         }
 
         return this.updateBillPay(this.item.id);
     }
 
-    createBillPay() {
+    createBillPay(){
         this.billsToPayService.create(this.form.value).then(() => {
             this.itemDialog = false;
             this.form.reset();
@@ -85,7 +96,7 @@ export class BillsToPayComponent implements OnInit {
         })
     }
 
-    updateBillPay(id: string) {
+    updateBillPay(id: string){
         this.billsToPayService.update(id, this.form.value).then(res => {
             this.itemDialog = false;
 
@@ -95,13 +106,13 @@ export class BillsToPayComponent implements OnInit {
         })
     }
 
-    deleteBillPay(billPay: BillToPay) {
+    deleteBillPay(billPay: BillToPay){
         this.deleteItemDialog = true;
         this.item = billPay;
     }
 
-    confirmDeleteBillPay() {
-        if (!this.item.id) {
+    confirmDeleteBillPay(){
+        if (!this.item.id){
             return;
         }
         this.billsToPayService.delete(this.item.id).then(res => {
@@ -111,7 +122,7 @@ export class BillsToPayComponent implements OnInit {
         });
     }
 
-    editBillPay(item: BillToPay) {
+    editBillPay(item: BillToPay){
         const id = item.id;
         this.item = item;
         delete item.id;
