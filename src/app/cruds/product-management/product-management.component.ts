@@ -4,33 +4,44 @@ import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BillsToReceive } from 'src/app/interfaces/bills-to-receive';
-import { BillsToReceiveService } from 'src/app/services/bills-to-receive.service';
+import { BillToPay } from 'src/app/interfaces/bill-to-pay';
+import { BillsToPayService } from 'src/app/services/bills-to-pay.service';
 import { map } from 'rxjs';
 
 @Component({
-    templateUrl: './bills-to-receive.component.html',
+    templateUrl: './product-management.component.html',
     providers: [MessageService]
 })
-export class BillsToReceiveComponent implements OnInit {
+export class ProductManagementComponent implements OnInit {
     public cols: any[] = [];
     public rowsPerPageOptions = [5, 10, 20];
     public form!: FormGroup;
-    public items: BillsToReceive[] = [];
-    public item!: BillsToReceive;
+    public items: BillToPay[] = [];
+    public item!: BillToPay;
     public itemDialog: boolean = false;
     public deleteItemDialog: boolean = false;
 
     constructor(
         private productService: ProductService,
         private messageService: MessageService,
-        private billsToReceiveService: BillsToReceiveService,
+        private billsToPayService: BillsToPayService,
         private formBuilder: FormBuilder
     ) { }
 
     ngOnInit() {
         this.onCreateForm();
         this.onLoadItems();
+        this.onLoadCols();
+    }
+
+    onLoadCols() {
+        this.cols = [
+            { field: 'name', header: 'Nome' },
+            { field: 'descricao', header: 'Descricao' },
+            { field: 'categoria', header: 'Categoria' },
+            { field: 'preco', header: 'Preço' },
+            { field: 'quantidade', header: 'Quantidade' }
+        ];
     }
 
     openNew() {
@@ -50,17 +61,15 @@ export class BillsToReceiveComponent implements OnInit {
     onCreateForm() {
        this.form = this.formBuilder.group({
           name: ['', Validators.required],
-          documentDate: ['', Validators.required],
-          documentNumber: ['', Validators.required],
-          supplierName: ['', Validators.required],
-          amount: ['', Validators.required],
-          installmentQuantity: ['', Validators.required],
-          dueDate: ['', Validators.required]
+          descricao: ['', Validators.required],
+          categoria: ['', Validators.required],
+          preco: ['', Validators.required],
+          quantidade: ['', Validators.required]
        });
     }
 
     onLoadItems() {
-        this.billsToReceiveService.getAll().snapshotChanges().pipe(
+        this.billsToPayService.getAll().snapshotChanges().pipe(
             map(changes =>
                changes.map(c =>
                 ({ id: c.payload.doc.id, ...c.payload.doc.data()})
@@ -73,52 +82,52 @@ export class BillsToReceiveComponent implements OnInit {
 
     onSaveForm() {
         if (!this.item?.id) {
-            return this.createBillReceive();
+            return this.createBillPay();
         }
 
-        return this.updateBillReceive(this.item.id);
+        return this.updateBillPay(this.item.id);
     }
 
-    createBillReceive() {
-        this.billsToReceiveService.create(this.form.value).then(() => {
+    createBillPay() {
+        this.billsToPayService.create(this.form.value).then(() => {
             this.itemDialog = false;
             this.form.reset();
 
             this.messageService.add({ severity: 'success',
-            summary: 'Sucesso', detail: 'Contas a pagar criada!', life: 3000});
+            summary: 'Sucesso', detail: 'Produto criado!', life: 3000});
 
         })
     }
 
-    updateBillReceive(id: string) {
-        this.billsToReceiveService.update(id, this.form.value).then(res => {
+    updateBillPay(id: string) {
+        this.billsToPayService.update(id, this.form.value).then(res => {
             this.itemDialog = false;
 
             this.messageService.add({ severity: 'success',
-            summary: 'Sucesso', detail: 'Contas a pagar atualizada!', life: 3000});
+            summary: 'Sucesso', detail: 'Produto atualizado!', life: 3000});
 
             this.form.reset();
         })
     }
 
-    deleteBillReceive(billReceive: BillsToReceive) {
+    deleteBillPay(billPay: BillToPay) {
         this.deleteItemDialog = true;
-        this.item = billReceive;
+        this.item = billPay;
     }
 
-    confirmDeleteBillReceive() {
+    confirmDeleteBillPay() {
         if (!this.item.id) {
             return;
         }
-        this.billsToReceiveService.delete(this.item.id).then(res => {
+        this.billsToPayService.delete(this.item.id).then(res => {
             this.messageService.add({ severity: 'success',
-            summary: 'Sucesso', detail: 'Contas a receber deletada!', life: 3000});
+            summary: 'Sucesso', detail: 'Produto deletado!', life: 3000});
 
             this.deleteItemDialog = false;
         });
     }
 
-    editBillReceive(item: BillsToReceive) {
+    editBillPay(item: BillToPay) {
         const id = item.id;
         this.item = item;
         delete item.id;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BillsToReceiveComponent } from './bills-to-receive.component';
+import { ProductManagementComponent } from './product-management.component';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ButtonModule } from 'primeng/button';
@@ -15,12 +15,14 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
-import { BillsToReceiveRoutingModule } from './bills-to-receive-routing.module';
+import { BillsToPayRoutingModule } from './product-management-routing.module';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
     imports: [
         CommonModule,
-        BillsToReceiveRoutingModule,
+        BillsToPayRoutingModule,
         TableModule,
         FileUploadModule,
         FormsModule,
@@ -35,8 +37,10 @@ import { BillsToReceiveRoutingModule } from './bills-to-receive-routing.module';
         RadioButtonModule,
         InputNumberModule,
         DialogModule,
-        ReactiveFormsModule
+        CalendarModule,
+        ReactiveFormsModule,
+        CheckboxModule
     ],
-    declarations: [BillsToReceiveComponent]
+    declarations: [ProductManagementComponent]
 })
-export class BillsToReceiveModule { }
+export class ProductManagementModule { }

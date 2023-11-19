@@ -28,9 +28,9 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Usuario',
+                label: 'Estoque',
                 items: [
-                    { label: 'Cadastro de Usuarios', icon: 'pi pi-fw pi-id-card', routerLink: ['/uikit/misc'] },
+                    { label: 'Cadastro de Produtos', icon: 'pi pi-fw pi-id-card', routerLink: ['cadastro-de-produtos'] },
                 ]
             },
         ];
